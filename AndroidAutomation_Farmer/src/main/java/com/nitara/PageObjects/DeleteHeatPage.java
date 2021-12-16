@@ -5,7 +5,7 @@ import org.testng.Assert;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 
-public class DeleteInsemination_Page extends BasePage {
+public class DeleteHeatPage extends BasePage {
 
 	@AndroidFindBy(id = "com.nitara.farmer:id/search_farm_param") 
 	private MobileElement search_cattle;
@@ -16,17 +16,17 @@ public class DeleteInsemination_Page extends BasePage {
 	@AndroidFindBy(id ="com.nitara.farmer:id/breedingBtn")
 	private MobileElement breeding_btn;
 	
-	@AndroidFindBy(id = "com.nitara.farmer:id/btnAddActivity")
+	@AndroidFindBy(id ="com.nitara.farmer:id/ivAddActivityIcon")
 	private MobileElement addActivity_Btn;
 	
-	@AndroidFindBy(id = "com.nitara.farmer:id/natural_insemination")
+	@AndroidFindBy(id = "com.nitara.farmer:id/heatCardView")
+	private MobileElement heat_btn;
+	
+	@AndroidFindBy(id = "com.nitara.farmer:id/naturalBtn")
 	private MobileElement natural_btn;
 	
-	@AndroidFindBy(id = "com.nitara.farmer:id/bullId")
-	private MobileElement bullId;
-	
-	@AndroidFindBy(id = "com.nitara.farmer:id/insemination_date")
-	private MobileElement insemination_date;
+	@AndroidFindBy(id = "com.nitara.farmer:id/heat_date")
+	private MobileElement heat_date;
 	
 	@AndroidFindBy(uiAutomator = "new UiScrollable(" + "new UiSelector().scrollable(true)).scrollIntoView("
 			+ "new UiSelector().resourceIdMatches(\"" +"com.nitara.farmer:id/saveBtn"+ "\"))")  
@@ -35,8 +35,7 @@ public class DeleteInsemination_Page extends BasePage {
 	@AndroidFindBy(id = "com.nitara.farmer:id/back_cattle_result")
 	private MobileElement goBackBtn;
 	
-	@AndroidFindBy(uiAutomator = "new UiScrollable(" + "new UiSelector().scrollable(true)).scrollIntoView("
-			+ "new UiSelector().resourceIdMatches(\"" +"com.nitara.farmer:id/btnRemoveLeft"+ "\"))")  
+	@AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.View/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.view.View[2]/android.view.View[1]/android.widget.Button[2]")
 	private MobileElement deleteBtn ;
 	
 	@AndroidFindBy(id = "android:id/button1")
@@ -62,28 +61,26 @@ public class DeleteInsemination_Page extends BasePage {
 		click(breeding_btn);
 	}
 	
-	public void click_AddActivity() {
+	public void click_AddActivityBtn() {
 		waitVisibility(addActivity_Btn);
 		click(addActivity_Btn);
-		
+	}
+
+	
+	public void click_HeatBtn() {
+		 waitVisibility(heat_btn);
+		click(heat_btn);
 	}
 	
-	public void click_naturalInsem_Btn() {
+	public void click_HeatType() {
 		waitVisibility(natural_btn);
 		click(natural_btn);
 	}
 	
-	public void enter_BullId(String bId) {
-		waitVisibility(bullId);
-		click(bullId);
-		sendKeys(bullId, bId);
-		hideKeyboard();
-	}
-	
-	public void enterInseminationDate(String date) {
-		waitVisibility(insemination_date);
-		clear(insemination_date);
-		sendKeys(insemination_date, date);
+	public void enterHeatDate(String date) {
+		waitVisibility(heat_date);
+		clear(heat_date);
+		sendKeys(heat_date, date);
 	}
 	
 	public void press_SaveButton() {
@@ -94,7 +91,7 @@ public class DeleteInsemination_Page extends BasePage {
 		waitVisibility(goBackBtn);
 		click(goBackBtn);
 	}
-	
+	  
 	   public void press_DeleteBtn() {
 	    	click(deleteBtn);
 	    }
@@ -105,7 +102,7 @@ public class DeleteInsemination_Page extends BasePage {
 	    }
 	   public void assertDeleteMsg() {
 		   waitVisibility(deleteMsg);
-		   Assert.assertEquals(deleteMsg.getText()," Insemination data recorded on 20 Nov 2021 has been deleted for this Cattle");
+		   Assert.assertEquals(deleteMsg.getText()," Heat data recorded on 16 Nov 2021 has been deleted for this Cattle");
 	   }
 	
 }

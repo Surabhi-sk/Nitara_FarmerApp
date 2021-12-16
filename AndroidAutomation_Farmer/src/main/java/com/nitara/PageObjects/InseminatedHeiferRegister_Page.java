@@ -11,9 +11,9 @@ public class InseminatedHeiferRegister_Page extends BasePage{
 	private MobileElement select_cattle;
 
 
-	@AndroidFindBy(id = "com.nitara.farmer:id/phone_number") 
-	private MobileElement phone_number;
-	
+//	@AndroidFindBy(id = "com.nitara.farmer:id/phone_number") 
+//	private MobileElement phone_number;
+//	
 	
 	@AndroidFindBy(id = "com.nitara.farmer:id/earTagNumberOrName") 
 	private MobileElement TagNumber;
@@ -36,8 +36,8 @@ public class InseminatedHeiferRegister_Page extends BasePage{
 	@AndroidFindBy(id = "com.nitara.farmer:id/cattle_type_spinner") 
 	private MobileElement cattle_type;
 	
-	@AndroidFindBy(id = "com.nitara.farmer:id/com.nitara.farmer:id/cattle_type_lbl") 
-	private MobileElement cattle_type_lbl;
+//	@AndroidFindBy(id = "com.nitara.farmer:id/com.nitara.farmer:id/cattle_type_lbl") 
+//	private MobileElement cattle_type_lbl;
 	
 	@AndroidFindBy(uiAutomator = "new UiScrollable(" + "new UiSelector().scrollable(true)).scrollIntoView("
 			+ "new UiSelector().resourceIdMatches(\"" +"com.nitara.farmer:id/breed_list_spinner"+ "\"))")  
@@ -91,14 +91,14 @@ public class InseminatedHeiferRegister_Page extends BasePage{
 	
 	public void assert_CattleType() {
 		waitVisibility(select_cattle);
-		Assert.assertEquals(select_cattle.getText(), "INSEMINATED HEIFER");
+		Assert.assertEquals(select_cattle.getText(), "Inseminated Heifer");
 	}
 	
-	public void assert_Phone_Number(String phone) {
-		waitVisibility(phone_number);
-		Assert.assertEquals(phone_number.getText(), phone);
-	}
-	
+//	public void assert_Phone_Number(String phone) {
+//		waitVisibility(phone_number);
+//		Assert.assertEquals(phone_number.getText(), phone);
+//	}
+//	
 	public void enter_TagNumber(String tag) {
 		waitVisibility(TagNumber);
 		sendKeys(TagNumber,tag);
