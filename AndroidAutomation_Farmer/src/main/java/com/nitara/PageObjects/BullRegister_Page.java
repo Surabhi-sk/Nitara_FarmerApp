@@ -6,15 +6,9 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 
 public class BullRegister_Page extends BasePage{
-	
 	@AndroidFindBy(id = "com.nitara.farmer:id/select_cattle_tv") 
 	private MobileElement select_cattle;
 
-
-	@AndroidFindBy(id = "com.nitara.farmer:id/phone_number") 
-	private MobileElement phone_number;
-	
-	
 	@AndroidFindBy(id = "com.nitara.farmer:id/earTagNumberOrName") 
 	private MobileElement TagNumber;
 	
@@ -30,16 +24,14 @@ public class BullRegister_Page extends BasePage{
 	@AndroidFindBy(id = "com.nitara.farmer:id/month_of_birth_spinner") 
 	private MobileElement month;
 	
-	@AndroidFindBy(uiAutomator = "new UiScrollable(" + "new UiSelector().scrollable(true)).scrollIntoView("
-			+ "new UiSelector().resourceIdMatches(\"" +"com.nitara.serviceprovider:id/crossed_with_list_spinner"+ "\"))")  
+	@AndroidFindBy(id = "com.nitara.farmer:id/crossed_with_list_spinner") 
 	private MobileElement crossed_with;
 	
-	@AndroidFindBy(uiAutomator = "new UiScrollable(" + "new UiSelector().scrollable(true)).scrollIntoView("
-			+ "new UiSelector().resourceIdMatches(\"" +"com.nitara.farmer:id/cattle_type_spinner"+ "\"))")  
+	@AndroidFindBy(id = "com.nitara.farmer:id/cattle_type_spinner") 
 	private MobileElement cattle_type;
 	
-	@AndroidFindBy(id = "com.nitara.farmer:id/com.nitara.serviceprovider:id/cattle_type_lbl") 
-	private MobileElement cattle_type_lbl;
+//	@AndroidFindBy(id = "com.nitara.farmer:id/com.nitara.farmer:id/cattle_type_lbl") 
+//	private MobileElement cattle_type_lbl;
 	
 	@AndroidFindBy(uiAutomator = "new UiScrollable(" + "new UiSelector().scrollable(true)).scrollIntoView("
 			+ "new UiSelector().resourceIdMatches(\"" +"com.nitara.farmer:id/breed_list_spinner"+ "\"))")  
@@ -53,26 +45,19 @@ public class BullRegister_Page extends BasePage{
 	private MobileElement crossbreed_toogle;
 	
 	@AndroidFindBy(uiAutomator = "new UiScrollable(" + "new UiSelector().scrollable(true)).scrollIntoView("
+			+ "new UiSelector().resourceIdMatches(\"" +"com.nitara.farmer:id/weight"+ "\"))")  
+	private MobileElement weight1;
+	
+	@AndroidFindBy(uiAutomator = "new UiScrollable(" + "new UiSelector().scrollable(true)).scrollIntoView("
 			+ "new UiSelector().resourceIdMatches(\"" +"com.nitara.farmer:id/save_btn"+ "\"))")  
 	private MobileElement save_btn;
 	
 	
-	@AndroidFindBy(uiAutomator = "new UiScrollable(" + "new UiSelector().scrollable(true)).scrollIntoView("
-			+ "new UiSelector().resourceIdMatches(\"" +"com.nitara.farmer:id/weight"+ "\"))")  
-	private MobileElement weight;
-	
-	
-	
 	public void assert_CattleType() {
 		waitVisibility(select_cattle);
-		Assert.assertEquals(select_cattle.getText(), "BULL");
+		Assert.assertEquals(select_cattle.getText(), "Bull");
 	}
-	
-	public void assert_Phone_Number(String phone) {
-		waitVisibility(phone_number);
-		Assert.assertEquals(phone_number.getText(), phone);
-	}
-	
+
 	public void enter_TagNumber(String tag) {
 		waitVisibility(TagNumber);
 		sendKeys(TagNumber,tag);
@@ -107,7 +92,6 @@ public class BullRegister_Page extends BasePage{
 		select_dropdown(breed);
 	}
 	
-	
 	public void select_crossbreedToggle(String toggle,String crossbreed) {
 		//scrollfindElement("CROSSBREED");
 		String checked = crossbreed_toogle.getAttribute("checked");
@@ -118,15 +102,13 @@ public class BullRegister_Page extends BasePage{
 		}
 	
 	}
-	
-	public void enter_weight(String kg) {
-		sendKeys(weight,kg);
-	}
-	
+	 public void enter_Weight( String wgt) {
+		 click(weight1);
+		 sendKeys(weight1, wgt);
+		 hideKeyboard();
+	 }
 	public void press_SaveButton() {
 		click(save_btn);	
 	}
-
-	
 
 }

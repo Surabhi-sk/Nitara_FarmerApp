@@ -1,3 +1,7 @@
+/*
+@Author: Neha Sahu
+This test case is used to verify if User can view Insemination details of  a particular cattle.
+*/
 package HealthManagement;
 
 import java.util.Map;
@@ -5,51 +9,61 @@ import java.util.Map;
 import org.testng.annotations.Test;
 
 import com.nitara.GenericBase.GenericBase;
-import com.nitara.Helper.GenerateRandomData;
-import com.nitara.PageObjects.AddDeworming_Page;
 import com.nitara.PageObjects.FarmerHomePage;
 import com.nitara.PageObjects.ViewInsemination_Page;
 import com.nitara.utils.DataProviderUtils;
 
-public class ViewInsemination extends GenericBase{
-	
+public class ViewInsemination extends GenericBase {
+
 	@Test(dataProvider = "getData",dataProviderClass = DataProviderUtils.class)
 	public void ViewActivity_Insemination(Map<String,String> data) throws InterruptedException {
-		/*@Author: Muskan Khowala
-		 * View Insemination script for viewing insemination data in breeding page */
-		GenerateRandomData numb = new GenerateRandomData();
+		
+		Thread.sleep(8000);
+		//Farmer Home page - Select Register Cattle
 		FarmerHomePage obj = new FarmerHomePage();
+		obj.clickSearchBtn();
+		
 		Thread.sleep(8000);
-		obj.press_Search();/*Clicking on search button in homepage*/
+		// View Insemination Page
+		ViewInsemination_Page view = new ViewInsemination_Page();
+		
+		// Select cattle to add Insemination 
+//		view.SearchCattle(data.get("CattleName"));
+		view.SearchCattle("Alx");
+		view.SelectCattle();
 		Thread.sleep(8000);
-		ViewInsemination_Page reg = new ViewInsemination_Page();
-		reg.SearchCattle(data.get("CattleName"));/*Searching the cattle*/
-		reg.SelectCattle();/*Selecting the cattle*/
-		reg.hideKeyboard();
+		view.click_Breeding();
+		
 		Thread.sleep(8000);
-		reg.SelectBreed();/*Clicking on breeding*/
+		view.click_AddActivity();
 		Thread.sleep(8000);
-		reg.addActivity();/*Clicking on add activity button*/
+		view.click_naturalInsem_Btn();
 		Thread.sleep(8000);
-		reg.press_Artificial();/*Clicking on artificial insemination button*/
-		/*Asserting the heat date*/
-		reg.findElement("27 Nov 2021");
-		reg.assert_heatdate();
-		reg.Bull(data.get("Bull_ID"));/*Inserting bullid from excel sheet*/
-		reg.hideKeyboard();
-		reg.press_Save();/*Pressing save button*/
-		reg.press_back();/*Pressing back button*/
-		/*Asserting the insemination date*/
-		reg.findElement("27 Nov 2021");
-		reg.assert_date();
-		/*Asserting the type of insemination*/
-		reg.findElement("Artificial");
-		reg.assert_type();
-		/*Asserting the bull id*/
-		reg.findElement("100");
-		reg.assert_bullid();
-		/*Asserting the insemination with*/
-		reg.findElement("SAG");
-		reg.assert_with();
+		view.enter_BullId(data.get("Bull_ID"));
+	
+		view.enterInseminationDate(data.get("Date"));
+		
+		 Thread.sleep(8000);
+		view.press_SaveButton();
+        view.click_BackBtn();
+        
+        // Check details of added Insemination in View Insemination Page
+        Thread.sleep(8000);
+	    view.findElement(data.get("Date"));
+		view.checkDate(data.get("Date"));
+		
+		view.findElement("Natural");
+		view.checkHeatType();
+
+		view.findElement("Natural");
+		view.check_InsemType();
+
+		view.findElement(data.get("Bull_ID"));
+		view.checkBullId(data.get("Bull_ID"));
+
+		view.findElement("Recorded By : Test2");
+     	view.checkRecorded();
+		
+	
 	}
 }

@@ -9,6 +9,7 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.lang.Object;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -133,9 +134,10 @@ public class BasePage {
 
 
 	public String captureToast() {
-		WebDriverWait waitForToast = new WebDriverWait(driver,25);
+		WebDriverWait waitForToast = new WebDriverWait(driver,5);
 		waitForToast.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/hierarchy/android.widget.Toast")));
 		String toastMessage = driver.findElement(By.xpath("/hierarchy/android.widget.Toast")).getText();
+		System.out.print(toastMessage);
 		return toastMessage;
 	}
 	
@@ -165,9 +167,17 @@ public class BasePage {
 		driver.hideKeyboard();
 	}
 	
+	public void select_dewormer(String dewormer) {
+		String xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.View/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.widget.FrameLayout/android.view.View/android.widget.LinearLayout/android.view.View/android.view.View[2]/";
+		for(int i=1;i<6;i++) {
+			WebElement dewormers = driver.findElement(By.xpath(xpath+"android.widget.FrameLayout["+i+"]/android.widget.TextView"));
+			if(dewormers.getText().equalsIgnoreCase(dewormer)) {
+				driver.findElement(By.xpath(xpath+"android.widget.FrameLayout["+i+"]/android.widget.CheckBox")).click();
+				break;
+			}
+		}
 	
-	
-
+	}
 }
 
 
